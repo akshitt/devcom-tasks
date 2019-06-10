@@ -1,0 +1,53 @@
+<html>
+    <head>
+            <title> Blogs </title>
+    </head>
+    
+    <body>
+            {% if not user.is_authenticated %}
+            
+            <form class="site-form" action="{%url 'accounts:login' %}" method="post">
+                {% csrf_token %}
+                {{form}}
+                {% if request.GET.next %}
+                    <input type = "hidden" name = "next" value="{{request.GET.next}}">
+                {% endif %}
+                <input type = "submit" value = "Login">
+            </form>
+            {% endif %}
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                <li>
+                    <form class = "logout-link" action="{%url 'accounts:logout'%}"  method="post">
+                        {% csrf_token %}
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        <h1> Blog List  </h1>
+        <div class = "articles">
+            {% for article in articles %}
+            <div class = "article">
+                {%if article.author == user %}
+                <h2> <a href="{%url 'articles:detail' slug=article.slug %}"> {{article.title}} </a> </h2>
+                <p>{{article.snippet}}</p>
+                <p>{{article.date}}</p>
+                <a href="{% url 'articles:edit_post' slug=article.slug  %}"><button type="button">Edit</button></a>
+                {% endif %}
+            </div>
+            {%if not user.is_authenticated %}
+            <div class = "article">
+                    
+                    <h2> <a href="{%url 'articles:detail' slug=article.slug %}"> {{article.title}} </a> </h2>
+                    <p>{{article.snippet}}</p>
+                    <p>{{article.date}}</p>
+                    
+                </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,17 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div class = "create-article">
+            <h2>
+                Create a New Article
+            </h2>
+            <form class ="site-form" action="{% url 'articles:create' %}" method="post" >
+                {% csrf_token %}
+                {{form}}
+                <input type="submit" value="Create">
+            </form>
+        </div>
+    </body>
+</html>

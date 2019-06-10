@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Complete Blog</title>
+    </head>
+    <body>
+            <nav>
+                    <ul>
+                        {% if user.is_authenticated %}
+                        <li>
+                            <form class = "logout-link" action="{%url 'accounts:logout'%}"  method="post">
+                                {% csrf_token %}
+                                <button type="submit">Logout</button>
+                            </form>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+        <div class = "article-detail">
+            <div class = "article>">
+                <h2>{{ article.title }}</h2>
+                <p> {{ article.body }}</p>
+                <p> {{ article.date }}</p>
+            </div>
+        </div>
+    </body>
+</html>
