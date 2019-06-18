@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Welcome !</title>{% endblock %}
+
+{% block content %}
+  <h1>Library Management System</h1>
+  <p>This is a basic implementation of Library Management using Django<br> SQLite has been used for maintaining databases</p>
+  <p>The library has the following record counts:</p>
+  <ul>
+    <li><strong>Books:</strong> {{ num_books }}</li>
+    <li><strong>Copies:</strong> {{ num_instances }}</li>
+    <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
+  </ul>
+{% endblock %}
+    
